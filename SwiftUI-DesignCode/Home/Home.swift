@@ -9,24 +9,16 @@
 import SwiftUI
 
 struct Home: View {
-    var menus = menuData
+    @State var show = false
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 20.0) {
-            
-            ForEach(menus) { menu in
-                MenuRow(image: menu.icon, title: menu.title)
+        ZStack {
+            Button(action: { self.show.toggle() }) {
+                Text("Open Menu")
             }
             
-            Spacer()
+            MenuView(show: $show)
         }
-        .padding(.top, 20.0) // 内边距
-        .padding(30)
-        .frame(minWidth: 0.0, maxWidth: .infinity)
-        .background(Color.white)
-        .cornerRadius(30.0)
-        .padding(.trailing, 60.0) // 外边距
-        .shadow(radius: 20)
     }
 }
 
@@ -52,10 +44,10 @@ struct MenuRow: View {
     }
 }
 
-struct Menu : Identifiable {
+struct Menu: Identifiable {
     var id = UUID()
-    var title : String
-    var icon : String
+    var title: String
+    var icon: String
 }
 
 let menuData = [
@@ -64,3 +56,32 @@ let menuData = [
     Menu(title: "我的分组", icon: "person.2"),
     Menu(title: "退出登录", icon: "arrow.uturn.down")
 ]
+
+struct MenuView: View {
+    var menus = menuData
+    @Binding var show: Bool // 依赖主组件的状态
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 20.0) {
+            
+            ForEach(menus) { menu in
+                MenuRow(image: menu.icon, title: menu.title)
+            }
+            
+            Spacer()
+        }
+            .padding(.top, 20.0) // 内边距
+            .padding(30)
+            .frame(minWidth: 0.0, maxWidth: .infinity)
+            .background(Color.white)
+            .cornerRadius(30.0)
+            .padding(.trailing, 60.0) // 外边距
+            .shadow(radius: 20)
+            .rotation3DEffect(Angle(degrees: show ? 0 : 60), axis: (x: 0.0, y: 10.0, z: 0.0))
+            .animation(.default)
+            .offset(x: show ? 0 : -UIScreen.main.bounds.width)
+            .onTapGesture {
+                self.show.toggle()
+        }
+    }
+}
