@@ -9,12 +9,15 @@
 import SwiftUI
 
 struct Home: View {
+    var menus = menuData
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 20.0) {
-            MenuRow(image: "person.crop.circle", title: "我的账号")
-            MenuRow(image: "creditcard", title: "我的账单")
-            MenuRow(image: "person.2", title: "我的分组")
-            MenuRow(image: "arrow.uturn.down", title: "退出登录")
+            
+            ForEach(menus) { menu in
+                MenuRow(image: menu.icon, title: menu.title)
+            }
+            
             Spacer()
         }
         .padding(.top, 20.0) // 内边距
@@ -48,3 +51,16 @@ struct MenuRow: View {
         }
     }
 }
+
+struct Menu : Identifiable {
+    var id = UUID()
+    var title : String
+    var icon : String
+}
+
+let menuData = [
+    Menu(title: "我的账号", icon: "person.crop.circle"),
+    Menu(title: "我的账单", icon: "creditcard"),
+    Menu(title: "我的分组", icon: "person.2"),
+    Menu(title: "退出登录", icon: "arrow.uturn.down")
+]
