@@ -13,6 +13,7 @@
 		3B3BB41C23A7306300A835E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B3BB41B23A7306300A835E1 /* Assets.xcassets */; };
 		3B3BB41F23A7306300A835E1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B3BB41E23A7306300A835E1 /* Preview Assets.xcassets */; };
 		3B3BB42223A7306300A835E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B3BB42023A7306300A835E1 /* LaunchScreen.storyboard */; };
+		3B3BB42B23A86D7D00A835E1 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3BB42A23A86D7D00A835E1 /* Home.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		3B3BB41E23A7306300A835E1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3B3BB42123A7306300A835E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3B3BB42323A7306300A835E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3B3BB42A23A86D7D00A835E1 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				3B3BB41523A7305D00A835E1 /* AppDelegate.swift */,
 				3B3BB41723A7305D00A835E1 /* SceneDelegate.swift */,
 				3B3BB41923A7305D00A835E1 /* ContentView.swift */,
+				3B3BB42923A86D6A00A835E1 /* Home */,
 				3B3BB41B23A7306300A835E1 /* Assets.xcassets */,
 				3B3BB42023A7306300A835E1 /* LaunchScreen.storyboard */,
 				3B3BB42323A7306300A835E1 /* Info.plist */,
@@ -73,6 +76,14 @@
 				3B3BB41E23A7306300A835E1 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		3B3BB42923A86D6A00A835E1 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				3B3BB42A23A86D7D00A835E1 /* Home.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +159,7 @@
 			files = (
 				3B3BB41623A7305D00A835E1 /* AppDelegate.swift in Sources */,
 				3B3BB41823A7305D00A835E1 /* SceneDelegate.swift in Sources */,
+				3B3BB42B23A86D7D00A835E1 /* Home.swift in Sources */,
 				3B3BB41A23A7305D00A835E1 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
