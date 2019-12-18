@@ -12,21 +12,37 @@ struct HomeList: View {
     @State var showCourse = false
     
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 20.0) {
-                ForEach(courseData) { course in
-                    Button(action: { self.showCourse.toggle() }) {
-                        CourseView(course: course)
-                    }.sheet(isPresented: self.$showCourse, onDismiss: {
-                        self.showCourse = false
-                    }) {
-                        ContentView()
+        VStack {
+            HStack {
+                VStack(alignment: .leading) {
+                    Text("Courses")
+                        .font(.largeTitle)
+                        .fontWeight(.heavy)
+                    Text("22 courses")
+                        .foregroundColor(.gray)
+                }
+                Spacer()
+            }
+            .padding(.horizontal, 70.0)
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(alignment: .top, spacing: 20.0) {
+                    ForEach(courseData) { course in
+                        Button(action: { self.showCourse.toggle() }) {
+                            CourseView(course: course)
+                        }.sheet(isPresented: self.$showCourse, onDismiss: {
+                            self.showCourse = false
+                        }) {
+                            ContentView()
+                        }
                     }
                 }
+                .frame(height: 460.0)
+                .padding(.horizontal, 40.0)
             }
-            .padding(.horizontal, 20)
-            .frame(height: 480)
+            Spacer()
         }
+        .padding(.top, 78.0)
     }
 }
 
@@ -44,7 +60,7 @@ struct CourseView: View {
                 .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(.white)
-                .padding(20)
+                .padding(30)
                 .lineLimit(4)
                 .padding(.trailing, 50)
             Spacer()
