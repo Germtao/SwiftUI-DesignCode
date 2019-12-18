@@ -16,20 +16,30 @@ struct UpdateList: View {
     var body: some View {
         NavigationView {
             List(updates) { item in
-                NavigationLink(destination: Text(item.title)) {
-                    VStack(alignment: .leading) {
-                        Text(item.title)
-                            .font(.headline)
-                        Text(item.text)
-                            .lineLimit(2)
-                            .lineSpacing(4)
-                            .font(.subheadline)
-                        Text(item.date)
-                            .font(.caption)
-                            .fontWeight(.bold)
-                            .foregroundColor(.gray)
+                NavigationLink(destination: UpdateDetail(update: item)) {
+                    HStack(spacing: 12.0) {
+                        Image(item.image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 80.0, height: 80.0)
+                            .background(Color("background"))
+                            .cornerRadius(20.0)
+                        
+                        VStack(alignment: .leading) {
+                            Text(item.title)
+                                .font(.headline)
+                            Text(item.text)
+                                .lineLimit(2)
+                                .lineSpacing(4)
+                                .font(.subheadline)
+                            Text(item.date)
+                                .font(.caption)
+                                .fontWeight(.bold)
+                                .foregroundColor(.gray)
+                        }
                     }
                 }
+                .padding(.vertical, 8.0)
             }
             .navigationBarTitle("Updates")
             .navigationBarItems(trailing:
