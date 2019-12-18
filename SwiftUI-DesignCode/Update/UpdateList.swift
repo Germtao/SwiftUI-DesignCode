@@ -12,44 +12,68 @@ struct UpdateList: View {
     @State var presented = false
     
     var updates = updateData
+    @ObservedObject var store = UpdateStore(updates: updateData)
+    
+    func addUpdate() {
+        store.updates.append(Update(image: "Certificate1", title: "New Title", text: "New Text", date: "DEC 18"))
+    }
+    
+    func move(from source: IndexSet, to destination: Int) {
+        store.updates.swapAt(source.first!, destination)
+    }
     
     var body: some View {
         NavigationView {
-            List(updates) { item in
-                NavigationLink(destination: UpdateDetail(update: item)) {
-                    HStack(spacing: 12.0) {
-                        Image(item.image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 80.0, height: 80.0)
-                            .background(Color("background"))
-                            .cornerRadius(20.0)
-                        
-                        VStack(alignment: .leading) {
-                            Text(item.title)
-                                .font(.headline)
-                            Text(item.text)
-                                .lineLimit(2)
-                                .lineSpacing(4)
-                                .font(.subheadline)
-                            Text(item.date)
-                                .font(.caption)
-                                .fontWeight(.bold)
-                                .foregroundColor(.gray)
+            List {
+                ForEach(store.updates) { item in
+                    NavigationLink(destination: UpdateDetail(update: item)) {
+                        HStack(spacing: 12.0) {
+                            Image(item.image)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 80.0, height: 80.0)
+                                .background(Color("background"))
+                                .cornerRadius(20.0)
+                            
+                            VStack(alignment: .leading) {
+                                Text(item.title)
+                                    .font(.headline)
+                                Text(item.text)
+                                    .lineLimit(2)
+                                    .lineSpacing(4)
+                                    .font(.subheadline)
+                                Text(item.date)
+                                    .font(.caption)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.gray)
+                            }
                         }
                     }
+                    .padding(.vertical, 8.0)
                 }
-                .padding(.vertical, 8.0)
+                .onDelete { indexSet in
+                    self.store.updates.remove(at: indexSet.first!)
+                }
+                .onMove(perform: move)
             }
             .navigationBarTitle("Updates")
             .navigationBarItems(trailing:
-                Button(action: { self.presented.toggle() }) {
-                    Image(systemName: "gear")
-                }.sheet(isPresented: $presented, onDismiss: {
-                    self.presented = false
-                }, content: {
-                    Text("Setting")
-                })
+                HStack {
+                    Button(action: addUpdate) {
+                        Image(systemName: "plus.circle")
+                            .foregroundColor(.black)
+                    }
+                    Button(action: { self.presented.toggle() }) {
+                        Image(systemName: "gear")
+                            .foregroundColor(.black)
+                    }.sheet(isPresented: $presented, onDismiss: {
+                        self.presented = false
+                    }, content: {
+                        Text("Setting")
+                    })
+                    EditButton()
+                        .foregroundColor(.black)
+                }
             )
         }
     }
