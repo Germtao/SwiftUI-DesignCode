@@ -92,7 +92,7 @@ struct MenuView: View {
         .padding(.top, 20.0) // 内边距
         .padding(30)
         .frame(minWidth: 0.0, maxWidth: .infinity)
-        .background(Color.white)
+        .background(BlurView(style: .systemMaterial))
         .cornerRadius(30.0)
         .padding(.trailing, 60.0) // 外边距
         .shadow(radius: 20)
@@ -110,10 +110,10 @@ struct CircleButton: View {
     var body: some View {
         HStack {
             Image(systemName: icon)
-                .foregroundColor(.black)
+                .foregroundColor(.primary)
         }
         .frame(width: 44.0, height: 44.0)
-        .background(Color.white)
+        .background(BlurView(style: .systemThickMaterial))
         .cornerRadius(30.0)
         .shadow(color: Color("buttonShadow"), radius: 10.0, x: 0.0, y: 10.0)
     }
@@ -128,11 +128,11 @@ struct MenuButton: View {
                     HStack {
                         Spacer()
                         Image(systemName: show ? "decrease.indent" : "increase.indent")
-                            .foregroundColor(.black)
+                            .foregroundColor(.primary) // 黑暗模式 - 白色, 正常模式 - 黑色
                     }
                     .padding(.trailing, 20.0)
                     .frame(width: 90.0, height: 60.0)
-                    .background(Color.white)
+                    .background(BlurView(style: .systemThickMaterial))
                     .cornerRadius(30.0)
                     .shadow(color: Color("buttonShadow"), radius: 10.0, x: 0.0, y: 10.0)
                 }

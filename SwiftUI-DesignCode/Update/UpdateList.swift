@@ -61,18 +61,18 @@ struct UpdateList: View {
                 HStack {
                     Button(action: addUpdate) {
                         Image(systemName: "plus.circle")
-                            .foregroundColor(.black)
+                            .foregroundColor(.primary)
                     }
-                    Button(action: { self.presented.toggle() }) {
-                        Image(systemName: "gear")
-                            .foregroundColor(.black)
-                    }.sheet(isPresented: $presented, onDismiss: {
-                        self.presented = false
-                    }, content: {
-                        Text("Setting")
-                    })
+//                    Button(action: { self.presented.toggle() }) {
+//                        Image(systemName: "gear")
+//                            .foregroundColor(.primary)
+//                    }.sheet(isPresented: $presented, onDismiss: {
+//                        self.presented = false
+//                    }, content: {
+//                        Text("Setting")
+//                    })
                     EditButton()
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
                 }
             )
         }

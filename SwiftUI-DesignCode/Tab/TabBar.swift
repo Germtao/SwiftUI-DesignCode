@@ -35,12 +35,17 @@ struct TabBar: View {
             }
             .tag(3)
         }
-        .accentColor(.black) // 设置选中颜色
+        .accentColor(.primary) // 设置选中颜色
     }
 }
 
 struct TabBar_Previews: PreviewProvider {
     static var previews: some View {
-        TabBar()
+        Group {
+            TabBar()
+            TabBar()
+                .environment(\.colorScheme, .dark)
+                .environment(\.sizeCategory, .extraLarge)
+        }
     }
 }
