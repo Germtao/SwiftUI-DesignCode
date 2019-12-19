@@ -57,23 +57,25 @@ struct UpdateList: View {
                 .onMove(perform: move)
             }
             .navigationBarTitle("Updates")
-            .navigationBarItems(trailing:
-                HStack {
-                    Button(action: addUpdate) {
-                        Image(systemName: "plus.circle")
+            .navigationBarItems(
+                leading:
+                    Button(action: { self.presented.toggle() }) {
+                        Image(systemName: "gear")
+                            .foregroundColor(.primary)
+                    }.sheet(isPresented: $presented, onDismiss: {
+                        self.presented = false
+                    }, content: {
+                        Settings()
+                    }),
+                trailing:
+                    HStack {
+                        Button(action: addUpdate) {
+                            Image(systemName: "plus.circle")
+                                .foregroundColor(.primary)
+                        }
+                        EditButton()
                             .foregroundColor(.primary)
                     }
-//                    Button(action: { self.presented.toggle() }) {
-//                        Image(systemName: "gear")
-//                            .foregroundColor(.primary)
-//                    }.sheet(isPresented: $presented, onDismiss: {
-//                        self.presented = false
-//                    }, content: {
-//                        Text("Setting")
-//                    })
-                    EditButton()
-                        .foregroundColor(.primary)
-                }
             )
         }
     }
