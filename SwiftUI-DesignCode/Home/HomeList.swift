@@ -29,7 +29,15 @@ struct HomeList: View {
                 HStack(alignment: .top, spacing: 20.0) {
                     ForEach(courseData) { course in
                         Button(action: { self.showCourse.toggle() }) {
-                            CourseView(course: course)
+                            GeometryReader { geometry in
+                                CourseView(course: course)
+                                    .rotation3DEffect(
+                                        Angle(degrees:
+                                            Double(geometry.frame(in: .global).minX - 40) / -20),
+                                        axis: (x: 0.0, y: 10.0, z: 0.0)
+                                    )
+                            }
+                            .frame(width: 246.0)
                         }.sheet(isPresented: self.$showCourse, onDismiss: {
                             self.showCourse = false
                         }) {
@@ -37,8 +45,9 @@ struct HomeList: View {
                         }
                     }
                 }
-                .frame(height: 460.0)
+//                .frame(height: 460.0)
                 .padding(.horizontal, 40.0)
+                .padding(.top, 30.0)
             }
             Spacer()
         }
@@ -87,6 +96,18 @@ struct Course: Identifiable {
 }
 
 let courseData = [
+    Course(
+        title: "Build an app with SwiftUI",
+        image: "Illustration1",
+        color: Color("background3"),
+        shadowColor: Color("backgroundShadow3")
+    ),
+    Course(
+        title: "Flutter For Designers",
+        image: "Illustration2",
+        color: Color("background4"),
+        shadowColor: Color("backgroundShadow4")
+    ),
     Course(
         title: "Build an app with SwiftUI",
         image: "Illustration1",
