@@ -84,11 +84,13 @@ struct CardView: View {
 }
 
 struct CertificateView: View {
+    var item = Certificate(title: "UI Design", image: "Certificate1", width: 340, height: 220)
+    
     var body: some View {
         VStack {
             HStack {
                 VStack(alignment: .leading) {
-                    Text("UI Design")
+                    Text(item.title)
                         .font(.headline)
                         .fontWeight(.bold)
                         .foregroundColor(Color("accent"))
@@ -104,12 +106,14 @@ struct CertificateView: View {
             }
             .padding(.horizontal)
             Spacer()
-            Image("Background")
+            Image(item.image)
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                .offset(y: 50)
         }
-        .frame(width: 340.0, height: 220.0)
+        .frame(width: CGFloat(item.width), height: CGFloat(item.height))
         .background(Color.black)
         .cornerRadius(10.0)
-        .shadow(radius: 20)
+        .shadow(radius: 10)
     }
 }
 

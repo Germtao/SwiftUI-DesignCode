@@ -12,46 +12,50 @@ struct HomeList: View {
     @State var showCourse = false
     
     var body: some View {
-        VStack {
-            HStack {
-                VStack(alignment: .leading) {
-                    Text("Courses")
-                        .font(.largeTitle)
-                        .fontWeight(.heavy)
-                    Text("22 courses")
-                        .foregroundColor(.gray)
+        ScrollView {
+            VStack {
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("Courses")
+                            .font(.largeTitle)
+                            .fontWeight(.heavy)
+                        Text("22 courses")
+                            .foregroundColor(.gray)
+                    }
+                    Spacer()
                 }
-                Spacer()
-            }
-            .padding(.horizontal, 70.0)
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(alignment: .top, spacing: 20.0) {
-                    ForEach(courseData) { course in
-                        Button(action: { self.showCourse.toggle() }) {
-                            GeometryReader { geometry in
-                                CourseView(course: course)
-                                    .rotation3DEffect(
-                                        Angle(degrees:
-                                            Double(geometry.frame(in: .global).minX - 40) / -20),
-                                        axis: (x: 0.0, y: 10.0, z: 0.0)
-                                    )
+                .padding(.horizontal, 70.0)
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(alignment: .top, spacing: 20.0) {
+                        ForEach(courseData) { course in
+                            Button(action: { self.showCourse.toggle() }) {
+                                GeometryReader { geometry in
+                                    CourseView(course: course)
+                                        .rotation3DEffect(
+                                            Angle(degrees:
+                                                Double(geometry.frame(in: .global).minX - 40) / -20),
+                                            axis: (x: 0.0, y: 10.0, z: 0.0)
+                                        )
+                                }
+                                .frame(width: 246.0)
+                            }.sheet(isPresented: self.$showCourse, onDismiss: {
+                                self.showCourse = false
+                            }) {
+                                ContentView()
                             }
-                            .frame(width: 246.0)
-                        }.sheet(isPresented: self.$showCourse, onDismiss: {
-                            self.showCourse = false
-                        }) {
-                            ContentView()
                         }
                     }
+                    .padding(.horizontal, 40.0)
+                    .padding(.top, 30.0)
+                    Spacer()
                 }
-//                .frame(height: 460.0)
-                .padding(.horizontal, 40.0)
-                .padding(.top, 30.0)
+                .frame(height: 450.0)
+                
+                CertificateRow()
             }
-            Spacer()
+            .padding(.top, 78.0)
         }
-        .padding(.top, 78.0)
     }
 }
 
