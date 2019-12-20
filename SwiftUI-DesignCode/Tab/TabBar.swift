@@ -30,6 +30,7 @@ struct TabBar: View {
             .tag(3)
         }
         .accentColor(.primary) // 设置选中颜色
+        .edgesIgnoringSafeArea(.top)
     }
 }
 

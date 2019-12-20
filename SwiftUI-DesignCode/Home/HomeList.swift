@@ -24,7 +24,7 @@ struct HomeList: View {
                     }
                     Spacer()
                 }
-                .padding(.horizontal, 70.0)
+                .padding(.horizontal, 60.0)
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(alignment: .top, spacing: 20.0) {
@@ -34,11 +34,11 @@ struct HomeList: View {
                                     CourseView(course: course)
                                         .rotation3DEffect(
                                             Angle(degrees:
-                                                Double(geometry.frame(in: .global).minX - 40) / -20),
+                                                Double(geometry.frame(in: .global).minX - 30) / -40),
                                             axis: (x: 0.0, y: 10.0, z: 0.0)
                                         )
                                 }
-                                .frame(width: 246.0)
+                                .frame(width: 246.0, height: 360)
                             }.sheet(isPresented: self.$showCourse, onDismiss: {
                                 self.showCourse = false
                             }) {
@@ -46,11 +46,11 @@ struct HomeList: View {
                             }
                         }
                     }
-                    .padding(.horizontal, 40.0)
+                    .padding(.horizontal, 30.0)
                     .padding(.top, 30.0)
+                    .padding(.bottom, 70.0)
                     Spacer()
                 }
-                .frame(height: 450.0)
                 
                 CertificateRow()
             }
